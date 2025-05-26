@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>Sarah...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+        body {
+            background-color: black;
+            color: red;
+            font-family: 'Creepster', cursive;
+            text-align: center;
+            margin-top: 20%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 60px;
+            text-shadow: 0 0 10px red, 0 0 20px red;
+            animation: tremer 0.1s infinite;
+            display: none;
+        }
+
+        @keyframes tremer {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, -5px); }
+            50% { transform: translate(-5px, 5px); }
+            75% { transform: translate(5px, 5px); }
+            100% { transform: translate(-5px, -5px); }
+        }
+
+        .sangue {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url('https://i.imgur.com/UePbdph.png') repeat;
+            opacity: 0.1;
+            mix-blend-mode: multiply;
+            z-index: 1;
+            display: none;
+        }
+
+        .fantasma {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease-in-out;
+            z-index: 2;
+        }
+
+        .fantasma.aparecer {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #startButton {
+            font-size: 24px;
+            padding: 15px 30px;
+            cursor: pointer;
+            background-color: darkred;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 20%;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startButton">Clique aqui para começar</button>
+
+    <div class="sangue"></div>
+    <h1>Sarah horrível merda</h1>
+    <img class="fantasma" src="https://i.imgur.com/E1gR8PZ.png" alt="Fantasma" width="300">
+
+    <audio id="grito" src="https://www.soundjay.com/human/screaming-female-01.mp3"></audio>
+
+    <script>
+        const button = document.getElementById('startButton');
+        const grito = document.getElementById('grito');
+        const h1 = document.querySelector('h1');
+        const sangue = document.querySelector('.sangue');
+        const fantasma = document.querySelector('.fantasma');
+
+        button.addEventListener('click', () => {
+            button.style.display = 'none'; // esconde o botão
+
+            // mostra os elementos da página
+            h1.style.display = 'block';
+            sangue.style.display = 'block';
+
+            grito.volume = 0.3;
+            grito.play();
+
+            setTimeout(() => {
+                fantasma.classList.add('aparecer');
+
+                const outroGrito = new Audio('https://www.soundjay.com/human/screaming-female-01.mp3');
+                outroGrito.volume = 0.3;
+                outroGrito.play();
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>
